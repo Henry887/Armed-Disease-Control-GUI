@@ -15,7 +15,10 @@ if game.PlaceId == 6370195843 then
     local YourStatusSection = StatusTab:NewSection("Your Status:")
     local OtherStatusSection = StatusTab:NewSection("Others Status:")
     local chosenPlayer = ""
-    local Player = game.Workspace[game.Players.LocalPlayer.name]
+    local Player = game:GetService("Players").LocalPlayer.Character
+    if Player.Diseases then
+        print("LOL")
+    end
     local yourDiseases = {}
     local yourSymptoms = {}
     local antiafk = false
@@ -25,6 +28,7 @@ if game.PlaceId == 6370195843 then
             a:Destroy()
         end
     end)
+    print("LOL")
     KeybindSection:NewKeybind("Open/Close GUI", "this opens and closes this gui", Enum.KeyCode.F, function()
 	    Library:ToggleUI()
     end)
