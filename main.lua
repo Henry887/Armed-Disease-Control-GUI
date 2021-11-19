@@ -6,6 +6,8 @@ if game.PlaceId == 6370195843 then
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
     local Window = Library.CreateLib("Armed Disease Control", "Synapse")
     local CureTab = Window:NewTab("Cure")
+    local VisualTab = Window:NewTab("Visuals")
+    local VisualSection = VisualTab:NewSection("Visuals")
     local CureSection = CureTab:NewSection("Cure Yourself")
     local StatusTab = Window:NewTab("Status")
     local localTab = Window:NewTab("LocalPlayer")
@@ -20,6 +22,15 @@ if game.PlaceId == 6370195843 then
     local yourDiseases = {}
     local yourSymptoms = {}
     local antiafk = false
+    local esp = false
+    outsider = game:GetService("Teams").Outsider 
+    security = game:GetService("Teams")["CDC Security"]
+    officer = game:GetService("Teams")["CDC Officer"]
+    raider = game:GetService("Teams").Raider 
+    doctor = game:GetService("Teams")["CDC Doctor"]
+    VisualSection:NewToggle("ESP", "See where everyone is", function(state)
+        esp = state
+    end)
     CureSection:NewDropdown("Cure Specific Disease", "Cures the specified disease if you have it", {"Bloxpox", "The Farts", "Flu", "Fever", "Killer", "Bloxulosis"}, function(dis)
         a = Player.Diseases:FindFirstChild(dis)
         if a then
@@ -31,6 +42,14 @@ if game.PlaceId == 6370195843 then
     end)
     PlayerSection:NewToggle("Toggle AntiAFK", "You can Farm exp with this", function(state)
         antiafk = state
+        if state == false then
+            for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                local g = v.Character:FindFirstChild("BillboardGui")
+                if g then
+                    g:Destroy()
+                end
+            end
+        end
     end)
     PlayerSection:NewButton("GodMode (Rejoin to Disable)", "You cannot die, but at what cost?", function()
         local player = game.Players.LocalPlayer
@@ -90,6 +109,49 @@ if game.PlaceId == 6370195843 then
     local OSymptomsLabel = OtherStatusSection:NewLabel("Initializing...")
     print("Loaded!")
     while wait(1) do
+        if esp then
+            for i, v in pairs(game.Players:GetChildren()) do
+                chara = v.Character
+                if chara then
+                    local cur_color
+                    if v.Team == outsider then
+                        cur_color = Color3.fromRGB(100, 100, 100)
+                    elseif v.Team == security then
+                        cur_color = Color3.fromRGB(0, 0, 0)
+                    elseif v.Team == officer then
+                        cur_color = Color3.fromRGB(0, 0, 255)
+                    elseif v.Team == doctor then
+                        cur_color = Color3.fromRGB(255, 255, 255)
+                    elseif v.Team == raider then
+                        cur_color = Color3.fromRGB(255, 0, 0)
+                    else
+                        cur_color = Color3.fromRGB(0, 255, 0)
+                    end
+                    local a = chara:FindFirstChild("BillboardGui")
+                    if a then
+                        a:Destroy()
+                    end
+                    if v == game.Players.LocalPlayer then
+                        
+                    else
+                        local x = Instance.new('BillboardGui',chara)
+                        x.AlwaysOnTop = true
+                        x.Size = UDim2.new(1.5,0,1.5,0)
+                        local b = Instance.new('Frame',x)
+                        b.Size = UDim2.new(1.5,0,1.5,0)
+                        x.Adornee = chara
+                        b.BackgroundColor3 = cur_color
+                    end
+                end
+            end
+        else
+            for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                local g = v.Character:FindFirstChild("BillboardGui")
+                if g then
+                    g:Destroy()
+                end
+            end
+        end
         if antiafk then
             game:GetService("ReplicatedStorage").Remotes.AFKToggle:FireServer(false)
         end
