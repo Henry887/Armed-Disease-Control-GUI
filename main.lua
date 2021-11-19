@@ -146,9 +146,11 @@ if game.PlaceId == 6370195843 then
             end
         else
             for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                if v.Character then
                 local g = v.Character:FindFirstChild("BillboardGui")
                 if g then
                     g:Destroy()
+                end
                 end
             end
         end
