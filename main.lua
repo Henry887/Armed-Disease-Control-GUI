@@ -1,6 +1,7 @@
 -- Made by Henry1887#6969
 -- If u want to showcase this script or use bits of the script from this then please credit me!
 -- DM me if u found Bugs or wanna give me feedback
+-- Hit Execute once ur  character is loaded
 if game.PlaceId == 6370195843 then
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
     local Window = Library.CreateLib("Armed Disease Control", "Synapse")
@@ -16,9 +17,6 @@ if game.PlaceId == 6370195843 then
     local OtherStatusSection = StatusTab:NewSection("Others Status:")
     local chosenPlayer = ""
     local Player = game:GetService("Players").LocalPlayer.Character
-    if Player.Diseases then
-        print("LOL")
-    end
     local yourDiseases = {}
     local yourSymptoms = {}
     local antiafk = false
@@ -28,7 +26,6 @@ if game.PlaceId == 6370195843 then
             a:Destroy()
         end
     end)
-    print("LOL")
     KeybindSection:NewKeybind("Open/Close GUI", "this opens and closes this gui", Enum.KeyCode.F, function()
 	    Library:ToggleUI()
     end)
