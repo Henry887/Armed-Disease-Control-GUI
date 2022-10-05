@@ -2,12 +2,18 @@
 -- If u want to showcase this script or use bits of the script from this then please credit me!
 -- DM me if u found Bugs or wanna give me feedback
 -- Hit Execute once ur  character is loaded
+-- Curing Diseases and seeing Diseases has been patched by the developer.
+-- Diseases are not being replicated to the client anymore. Though the Symptoms are still being replicated, prob because the client needs it for showing symptoms.
+-- Other than that everything still works as before.
 if game.PlaceId == 6370195843 then
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
     local Window = Library.CreateLib("Armed Disease Control", "Synapse")
     local CureTab = Window:NewTab("Cure")
     local VisualTab = Window:NewTab("Visuals")
     local VisualSection = VisualTab:NewSection("Visuals")
+    local InfoSection = CureTab:NewSection("WARNING: Curing Diseases does not work anymore")
+    local Info2Section = CureTab:NewSection("-Diseases aren't being replicated to the client anymore")
+    local Info3Section = CureTab:NewSection("-Curing Symptoms still work!")
     local CureSection = CureTab:NewSection("Cure Yourself")
     local StatusTab = Window:NewTab("Status")
     local localTab = Window:NewTab("LocalPlayer")
@@ -15,6 +21,8 @@ if game.PlaceId == 6370195843 then
     local CreditTab = Window:NewTab("Henry1887#6969")
     local KeybindSection = KeybindTab:NewSection("Keybinds")
     local PlayerSection = localTab:NewSection("Local")
+    local Info4Section = StatusTab:NewSection("WARNING: Diseases are not being shown anymore")
+    local Info5Section = StatusTab:NewSection("-> More Info in Cure Tab")
     local YourStatusSection = StatusTab:NewSection("Your Status:")
     local OtherStatusSection = StatusTab:NewSection("Others Status:")
     local chosenPlayer = ""
@@ -24,10 +32,10 @@ if game.PlaceId == 6370195843 then
     local antiafk = false
     local esp = false
     outsider = game:GetService("Teams").Outsider 
-    security = game:GetService("Teams")["CDC Security"]
-    officer = game:GetService("Teams")["CDC Officer"]
+    security = game:GetService("Teams")["Security"]
+    officer = game:GetService("Teams")["Military"]
     raider = game:GetService("Teams").Raider 
-    doctor = game:GetService("Teams")["CDC Doctor"]
+    doctor = game:GetService("Teams")["Doctor"]
     VisualSection:NewToggle("ESP", "See where everyone is", function(state)
         esp = state
     end)
